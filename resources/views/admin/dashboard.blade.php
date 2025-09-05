@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-
-<!-- Dashboard admin page -->
-
 <html>
 <head>
     <title>Admin Dashboard</title>
@@ -12,22 +9,22 @@
 
     <p>จำนวนพนักงานทั้งหมด: {{ $totalEmployees }}</p>
 
-    <a href="{{ route('admin.employees.index') }}">
-        <button>ดูรายชื่อพนักงาน</button>
+    {{-- Employee --}}
+    <a href="{{ route('admin.employees.index') }}"><button>ดูรายชื่อพนักงาน</button></a>
+    <a href="{{ route('admin.employees.create') }}"><button>เพิ่มพนักงาน</button></a>
+
+    {{-- Salary --}}
+    <a href="{{ route('admin.salary.index') }}"><button>จัดการเงินเดือน</button></a>
+
+    {{-- Leave --}}
+    <a href="{{ route('admin.leaves.index') }}"><button>จัดการคำขอลา</button></a>
+
+    {{-- Departments --}}
+    <a href="{{ route('admin.departments.index') }}">
+        <button>จัดการแผนก</button>
     </a>
 
-    <a href="{{ route('admin.employees.create') }}">
-        <button>เพิ่มพนักงาน</button>
-    </a>
-
-    <a href="{{ route('admin.salary.index') }}">
-        <button>จัดการเงินเดือน</button>
-    </a>
-
-    <a href="{{ route('admin.leaves.index') }}">
-        <button>จัดการคำขอลา</button>
-    </a>
-
+    {{-- Logout --}}
     <form method="POST" action="{{ route('logout') }}">
         @csrf
         <button type="submit">Logout</button>
