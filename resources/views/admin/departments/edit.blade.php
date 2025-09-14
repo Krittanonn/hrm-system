@@ -13,6 +13,8 @@
         </div>
 
         <button type="submit" class="btn btn-success">อัปเดต</button>
-        <a href="{{ route('admin.departments.index') }}" class="btn btn-secondary">ยกเลิก</a>
+        <a href="{{ route('admin.departments.index') }}">
+            <button>กลับหน้าจัดการแผนก</button>
+        </a>
     </form>
 </div>

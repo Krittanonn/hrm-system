@@ -24,13 +24,19 @@ class DepartmentController extends Controller
     // บันทึกข้อมูลแผนกใหม่
     public function store(Request $request)
     {
+        // ตัดช่องว่างรอบ ๆ
+        $name = trim($request->name);
+
+        // Validate
         $request->validate([
             'name' => 'required|string|max:255|unique:departments,name',
         ]);
 
-        Department::create(['name' => $request->name]);
+        // สร้างแผนก
+        Department::create(['name' => $name]);
 
-        return redirect()->route('departments.index')->with('success', 'เพิ่มแผนกสำเร็จ');
+        // Redirect ป้องกัน duplicate submission
+        return redirect()->route('admin.departments.index')->with('success', 'เพิ่มแผนกสำเร็จ');
     }
 
     // ฟอร์มแก้ไขแผนก
@@ -43,14 +49,19 @@ class DepartmentController extends Controller
     // อัปเดตข้อมูลแผนก
     public function update(Request $request, $id)
     {
+        // ตัดช่องว่างรอบ ๆ
+        $name = trim($request->name);
+
+        // Validate
         $request->validate([
             'name' => 'required|string|max:255|unique:departments,name,' . $id,
         ]);
 
+        // อัปเดต
         $department = Department::findOrFail($id);
-        $department->update(['name' => $request->name]);
+        $department->update(['name' => $name]);
 
-        return redirect()->route('departments.index')->with('success', 'แก้ไขแผนกสำเร็จ');
+        return redirect()->route('admin.departments.index')->with('success', 'แก้ไขแผนกสำเร็จ');
     }
 
     // ลบแผนก
@@ -59,6 +70,6 @@ class DepartmentController extends Controller
         $department = Department::findOrFail($id);
         $department->delete();
 
-        return redirect()->route('departments.index')->with('success', 'ลบแผนกสำเร็จ');
+        return redirect()->route('admin.departments.index')->with('success', 'ลบแผนกสำเร็จ');
     }
 }

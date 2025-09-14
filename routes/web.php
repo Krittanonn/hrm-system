@@ -15,14 +15,9 @@ use App\Http\Controllers\Admin\DepartmentController;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Authentication & Dashboard
-|
 */
 
-/*
-| Authentication
-*/
+// Authentication
 Route::get('/', function () {
     return redirect('/login');
 });
@@ -31,12 +26,9 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-/*
-| Dashboard redirect
-*/
+// Dashboard redirect
 Route::get('/dashboard', function () {
     $user = Auth::user();
-
     if (!$user) return redirect('/login');
 
     switch ($user->role_id) {
@@ -79,7 +71,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::post('/leaves/{id}/reject', [AdminLeaveController::class, 'reject'])->name('leaves.reject');
 
     // Departments CRUD
-    Route::resource('departments', DepartmentController::class);
+    Route::resource('departments', DepartmentController::class); // ชื่อ route จะเป็น admin.departments.*
 });
 
 /*
