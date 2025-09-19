@@ -93,5 +93,11 @@ Route::middleware('auth')->prefix('employee')->name('employee.')->group(function
     Route::post('/leave/submit', [EmployeeLeaveController::class, 'store'])->name('leave.submit');
 });
 
-Route::get('/employee/profile/edit', [EmployeeController::class, 'editProfile'])->name('employee.profile.edit');
-Route::post('/employee/profile/update', [EmployeeController::class, 'updateProfile'])->name('employee.profile.update');
+// Employee Dashboard & Profile
+Route::middleware('auth')->group(function(){
+    Route::get('employee/dashboard', [EmployeeDashboardController::class,'index'])->name('employee.dashboard');
+
+    Route::get('employee/profile/edit', [EmployeeController::class,'editProfile'])->name('employee.profile.edit');
+    Route::post('employee/profile/update', [EmployeeController::class,'updateProfile'])->name('employee.profile.update');
+    Route::get('employee/profile/image', [EmployeeController::class,'getProfileImage'])->name('employee.profile.image');
+});

@@ -14,8 +14,26 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('employee.profile.update') }}">
+        <form method="POST" action="{{ route('employee.profile.update') }}" enctype="multipart/form-data">
             @csrf
+
+            @if($employee->profile_image)
+                <div class="mb-4">
+                    <p class="font-semibold">รูปปัจจุบัน:</p>
+                    <img src="{{ route('employee.profile.image') }}" alt="Profile Image"
+                        class="w-32 h-32 rounded-full border">
+                </div>
+            @endif
+
+            <div class="mb-4">
+                <label class="block mb-1 font-semibold">อัปโหลดรูปใหม่</label>
+                <input type="file" name="profile_image" accept="image/*"
+                       class="w-full border rounded px-3 py-2 focus:ring focus:ring-blue-200">
+                @error('profile_image')
+                    <p class="text-red-500 text-sm">{{ $message }}</p>
+                @enderror
+            </div>
+
             <div class="mb-4">
                 <label class="block mb-1 font-semibold">ชื่อ</label>
                 <input type="text" name="first_name" value="{{ old('first_name', $employee->first_name) }}"
@@ -49,7 +67,7 @@
             <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
                 บันทึกการแก้ไข
             </button>
-            <a href="{{ url()->previous() }}" class="ml-2 px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
+            <a href="{{ route('employee.dashboard') }}" class="ml-2 px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
                 ย้อนกลับ
             </a>
         </form>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="th">
 <head>
+    <meta charset="UTF-8">
     <title>Employee Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -10,19 +11,36 @@
         <p class="mb-4">Welcome, <span class="font-medium">{{ auth()->user()->name }}</span></p>
 
         @if($employee)
-            <div class="mb-6">
-                <p><span class="font-semibold">ชื่อ:</span> {{ $employee->first_name }} {{ $employee->last_name }}</p>
-                <p><span class="font-semibold">แผนก:</span> {{ $employee->department->name ?? '-' }}</p>
-                <p><span class="font-semibold">ตำแหน่ง:</span> {{ $employee->position->name ?? '-' }}</p>
+            {{-- Profile Section --}}
+            <div class="flex items-center mb-6 space-x-6">
+                @if($employee->profile_image)
+                    <img src="{{ route('employee.profile.image') }}" 
+                         alt="Profile Image" 
+                         class="w-32 h-32 rounded-full border object-cover">
+                @else
+                    <div class="w-32 h-32 rounded-full border bg-gray-200 flex items-center justify-center text-gray-500">
+                        ไม่มีรูป
+                    </div>
+                @endif
+
+                <div>
+                    <p><span class="font-semibold">ชื่อ:</span> {{ $employee->first_name }} {{ $employee->last_name }}</p>
+                    <p><span class="font-semibold">แผนก:</span> {{ $employee->department->name ?? '-' }}</p>
+                    <p><span class="font-semibold">ตำแหน่ง:</span> {{ $employee->position->name ?? '-' }}</p>
+
+                    <div class="mt-4 flex space-x-2">
+                        <a href="{{ route('employee.profile.edit') }}">
+                            <button class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">แก้ไขโปรไฟล์</button>
+                        </a>
+                        <a href="{{ route('employee.leave.submit_form') }}">
+                            <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">ส่งคำขอลา</button>
+                        </a>
+                    </div>
+                </div>
             </div>
 
-            <a href="{{ route('employee.profile.edit') }}">
-                <button type="button" class="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
-                    แก้ไขโปรไฟล์
-                </button>
-            </a>
-
-            <h3 class="text-xl font-semibold mb-2">คำขอลาล่าสุด</h3>
+            {{-- Latest Leaves --}}
+            <h2 class="text-xl font-semibold mb-2">คำขอลาล่าสุด</h2>
             @if($leaves->count() > 0)
                 <div class="overflow-x-auto">
                     <table class="min-w-full border border-gray-300 divide-y divide-gray-200">
@@ -58,13 +76,11 @@
                 <p class="text-gray-500">ยังไม่มีคำขอลา</p>
             @endif
 
-            <a href="{{ route('employee.leave.submit_form') }}">
-                <button type="button" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">ส่งคำขอลา</button>
-            </a>
         @else
             <p class="text-red-500">ยังไม่ได้เพิ่มข้อมูลพนักงาน</p>
         @endif
 
+        {{-- Logout --}}
         <form method="POST" action="{{ route('logout') }}" class="mt-6">
             @csrf
             <button type="submit" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Logout</button>
