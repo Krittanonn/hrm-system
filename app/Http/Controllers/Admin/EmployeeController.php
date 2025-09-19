@@ -145,4 +145,27 @@ class EmployeeController extends Controller
         return redirect()->route('admin.employees.index')
                          ->with('success', 'ลบพนักงานเรียบร้อยแล้ว');
     }
+
+    public function editProfile()
+    {
+        $employee = auth()->user()->employee; 
+        return view('employee.profile_edit', compact('employee'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $employee = auth()->user()->employee;
+
+        $request->validate([
+            'first_name' => 'required|string|max:100',
+            'last_name'  => 'required|string|max:100',
+            'phone'      => 'nullable|string|max:20',
+            'address'    => 'nullable|string|max:255',
+        ]);
+
+        $employee->update($request->only(['first_name', 'last_name', 'phone', 'address']));
+
+        return redirect()->route('employee.profile.edit')->with('success', 'อัปเดตข้อมูลสำเร็จ');
+    }
+
 }

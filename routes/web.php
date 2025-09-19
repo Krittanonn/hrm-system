@@ -10,6 +10,7 @@ use App\Http\Controllers\Employee\LeaveController as EmployeeLeaveController;
 use App\Http\Controllers\Admin\SalaryController;
 use App\Http\Controllers\Admin\LeaveController as AdminLeaveController;
 use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\PositionController;  
 
 /*
 |--------------------------------------------------------------------------
@@ -71,7 +72,10 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::post('/leaves/{id}/reject', [AdminLeaveController::class, 'reject'])->name('leaves.reject');
 
     // Departments CRUD
-    Route::resource('departments', DepartmentController::class); // ชื่อ route จะเป็น admin.departments.*
+    Route::resource('departments', DepartmentController::class);
+
+    // Positions CRUD
+    Route::resource('positions', PositionController::class);
 });
 
 /*
@@ -88,3 +92,6 @@ Route::middleware('auth')->prefix('employee')->name('employee.')->group(function
     Route::get('/leave/submit', [EmployeeLeaveController::class, 'create'])->name('leave.submit_form');
     Route::post('/leave/submit', [EmployeeLeaveController::class, 'store'])->name('leave.submit');
 });
+
+Route::get('/employee/profile/edit', [EmployeeController::class, 'editProfile'])->name('employee.profile.edit');
+Route::post('/employee/profile/update', [EmployeeController::class, 'updateProfile'])->name('employee.profile.update');

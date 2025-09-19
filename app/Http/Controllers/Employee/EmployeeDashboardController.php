@@ -18,4 +18,6 @@ class EmployeeDashboardController extends Controller
         // show employee data in DB to dashboard
         return view('employee.dashboard', compact('employee', 'leaves'));
     }
+
+    
 }

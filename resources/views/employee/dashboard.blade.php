@@ -16,6 +16,12 @@
                 <p><span class="font-semibold">ตำแหน่ง:</span> {{ $employee->position->name ?? '-' }}</p>
             </div>
 
+            <a href="{{ route('employee.profile.edit') }}">
+                <button type="button" class="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+                    แก้ไขโปรไฟล์
+                </button>
+            </a>
+
             <h3 class="text-xl font-semibold mb-2">คำขอลาล่าสุด</h3>
             @if($leaves->count() > 0)
                 <div class="overflow-x-auto">

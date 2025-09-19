@@ -27,6 +27,8 @@
             <a href="{{ route('admin.departments.index') }}">
                 <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">จัดการแผนก</button>
             </a>
+            <a href="{{ route('admin.positions.index') }}">
+                <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">จัดการตำแหน่ง</button>
         </div>
 
         {{-- Logout --}}
