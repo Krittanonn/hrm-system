@@ -7,7 +7,7 @@
 <body class="bg-gray-100 min-h-screen p-6 font-sans">
     <div class="max-w-6xl mx-auto bg-white p-6 rounded shadow">
         <h1 class="text-2xl font-bold mb-4">Admin Dashboard</h1>
-        <p class="mb-2">Welcome, <span class="font-medium">{{ auth()->user()->name }}</span> (Role: {{ auth()->user()->role_id }})</p>
+        <p class="mb-2">Welcome, <span class="font-medium">{{ auth()->user()->employee->first_name }}</span> (Role: {{ auth()->user()->role_id }})</p>
         <p class="mb-6">จำนวนพนักงานทั้งหมด: <span class="font-semibold">{{ $totalEmployees }}</span></p>
 
         {{-- Buttons in one line --}}

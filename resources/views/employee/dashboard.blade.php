@@ -8,7 +8,7 @@
 <body class="bg-gray-100 min-h-screen p-6 font-sans">
     <div class="max-w-4xl mx-auto bg-white p-6 rounded shadow">
         <h1 class="text-2xl font-bold mb-4">Employee Dashboard</h1>
-        <p class="mb-4">Welcome, <span class="font-medium">{{ auth()->user()->name }}</span></p>
+        <p class="mb-4">Welcome, <span class="font-medium">{{ auth()->user()->employee->first_name }}</span></p>
 
         @if($employee)
             {{-- Profile Section --}}

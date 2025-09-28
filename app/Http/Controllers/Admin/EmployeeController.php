@@ -137,15 +137,13 @@ class EmployeeController extends Controller
 
     public function updateProfile(Request $request)
     {
-        $employee = auth()->user()->employee; // หรือดึง employee ตาม id
+        $employee = auth()->user()->employee; // get employee from id
 
-        // Update fields
         $employee->first_name = $request->first_name;
         $employee->last_name = $request->last_name;
         $employee->phone = $request->phone;
         $employee->address = $request->address;
 
-        // อัปโหลดรูป
         if ($request->hasFile('profile_image')) {
             $file = $request->file('profile_image');
             $employee->profile_image = file_get_contents($file->getRealPath());
