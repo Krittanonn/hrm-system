@@ -14,7 +14,6 @@ class AdminDashboardController extends Controller
 {
     public function index()
     {
-        // get total employees count
         $totalEmployees = Employee::count();
 
         return view('admin.dashboard', compact('totalEmployees'));

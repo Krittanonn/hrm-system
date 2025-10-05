@@ -12,9 +12,7 @@ use App\Models\User;
 
 class EmployeeController extends Controller
 {
-    // =====================
-    // Admin: Employees CRUD
-    // =====================
+
     public function index()
     {
         $employees = Employee::with(['department', 'position', 'user'])->get();
@@ -43,7 +41,6 @@ class EmployeeController extends Controller
             'profile_image'=>'nullable|image|max:5120',
         ]);
 
-        // Auto-generate unique email
         $emailBase = strtolower($request->first_name).'.'.strtolower($request->last_name);
         $email = $emailBase.'@company.com';
         $counter = 1;
@@ -126,9 +123,6 @@ class EmployeeController extends Controller
         return redirect()->route('admin.employees.index')->with('success','ลบพนักงานเรียบร้อยแล้ว');
     }
 
-    // =====================
-    // Employee: Profile
-    // =====================
     public function editProfile()
     {
         $employee = auth()->user()->employee;
@@ -137,7 +131,7 @@ class EmployeeController extends Controller
 
     public function updateProfile(Request $request)
     {
-        $employee = auth()->user()->employee; // get employee from id
+        $employee = auth()->user()->employee;
 
         $employee->first_name = $request->first_name;
         $employee->last_name = $request->last_name;

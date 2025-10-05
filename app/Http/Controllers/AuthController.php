@@ -9,13 +9,11 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    // start to login page
     public function showLogin()
     {
         return view('auth.login');
     }
 
-    // login process
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -23,11 +21,9 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        // check credentials has in database
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            // check role_id
             $roleId = Auth::user()->role_id;
 
             switch ($roleId) {
@@ -47,12 +43,11 @@ class AuthController extends Controller
         ]);
     }
 
-    // logout process
         public function logout(Request $request)
         {
-            Auth::logout(); // delete user login info
-            $request->session()->invalidate(); // destroy all session
-            $request->session()->regenerateToken(); // regenerate new token
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
 
             return redirect('/login');
         }

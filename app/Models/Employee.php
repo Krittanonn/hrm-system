@@ -6,10 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {   
-    /* 
-    whitelist for mass assignment 
-    ex. input first_name, age  age find not fillable so will be ignored and not saved to db 
-    */
+
     protected $fillable = [
         'first_name',
         'last_name',

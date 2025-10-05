@@ -8,14 +8,12 @@ use Illuminate\Http\Request;
 
 class LeaveController extends Controller
 {
-    // แสดงรายการคำขอลา
     public function index()
     {
         $leaves = Leave::with('employee.department', 'employee.position')->latest()->get();
         return view('admin.leaves.index', compact('leaves'));
     }
 
-    // อนุมัติ
     public function approve($id)
     {
         $leave = Leave::findOrFail($id);
@@ -24,7 +22,6 @@ class LeaveController extends Controller
         return back()->with('success', 'อนุมัติการลาเรียบร้อยแล้ว');
     }
 
-    // ปฏิเสธ
     public function reject($id)
     {
         $leave = Leave::findOrFail($id);

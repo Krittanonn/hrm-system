@@ -9,7 +9,7 @@
     <div class="w-full max-w-md bg-white p-6 rounded shadow">
         <h1 class="text-xl font-bold mb-4">เพิ่มตำแหน่งใหม่</h1>
 
-        <form action="{{ route('admin.departments.store') }}" method="POST" class="space-y-4">
+        <form action="{{ route('admin.positions.store') }}" method="POST" class="space-y-4">
             @csrf
 
             <div>
