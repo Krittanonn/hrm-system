@@ -19,6 +19,8 @@
                     <tr>
                         <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">ID</th>
                         <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">ชื่อ-นามสกุล</th>
+                        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">แผนก</th>
+                        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">ตำแหน่ง</th>
                         <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">ประเภทลา</th>
                         <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">วันที่เริ่ม</th>
                         <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">วันที่สิ้นสุด</th>
@@ -32,6 +34,8 @@
                     <tr>
                         <td class="px-4 py-2 text-sm text-gray-800">{{ $leave->id }}</td>
                         <td class="px-4 py-2 text-sm text-gray-800">{{ $leave->employee->first_name }} {{ $leave->employee->last_name }}</td>
+                        <td class="px-4 py-2 text-sm text-gray-800">{{ $leave->employee->department->name ?? '-' }}</td>
+                        <td class="px-4 py-2 text-sm text-gray-800">{{ $leave->employee->position->name ?? '-' }}</td>
                         <td class="px-4 py-2 text-sm text-gray-800">{{ $leave->leave_type }}</td>
                         <td class="px-4 py-2 text-sm text-gray-800">{{ $leave->start_date }}</td>
                         <td class="px-4 py-2 text-sm text-gray-800">{{ $leave->end_date }}</td>

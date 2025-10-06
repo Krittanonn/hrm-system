@@ -21,25 +21,21 @@ class Employee extends Model
     public function department()
     {   
         return $this->belongsTo(Department::class);
-        // Fk Employee belongsto Department
     }
 
     public function position()
     {
         return $this->belongsTo(Position::class);
-        // Fk Employee belongsto Position
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
-        // Fk Employee belongsto User
     }
 
     public function salaries()
     {   
         return $this->hasMany(Salary::class); 
-        // PK Employee has many to Salaries because can use to track salary history
     }
 
     public function leaves()
